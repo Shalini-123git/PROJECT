@@ -18,7 +18,8 @@ router.post("/post", upload.single("image"), async (req, res) => {
     let data = req.body;
     const newReport = new Report({url, filename});
     const newPatient = new Patient(data);
-    newPatient.image = {url, filename};
+    newPatient.image.save = {url, filename};
+
     await newPatient.save();
     await newReport.save();
 
