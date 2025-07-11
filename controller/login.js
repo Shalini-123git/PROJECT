@@ -7,19 +7,17 @@ module.exports.index = (req, res) => {
 }
 
 module.exports.post = async(req, res) => {
-    
     const { username } = req.body;
-
     const user = await Patient.findOne( { username });
     
     if(!user){
         res.json("user not found.... please insert valid username, email and password");
     }else{
-    const token = jwt.sign(
-        {username},
-        "secretkey",
-        {  expiresIn: "1h" },
-    );
+        const token = jwt.sign(
+            {username},
+            "secretkey",
+            {  expiresIn: "1h" },
+        );
     res.send(`User logged in sucessfully ${token} , this is token to access user information.`);
 }};
 
