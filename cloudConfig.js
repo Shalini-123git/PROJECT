@@ -13,9 +13,15 @@ const storage = new CloudinaryStorage({
     params: {
         folder: "Digital_Report",
         allowerdformets: ["pdf", "jpg"],
+            transformation: {
+            width: 400,
+            Height: 600,
+            crop: "limit"}}, 
+            function(error,result) {console.log(result, error)
+    },
         limit: "1mb"
     },
-});
+);
 
 module.exports = {
     cloudinary,                            //from cloudinary.Config 
