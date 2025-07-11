@@ -5,19 +5,18 @@ if(process.env.NODE_ENV != "production"){
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const patientSchema = require("./schema.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const userLogin = require("./routes/login.js");
 const userRegister = require("./routes/register.js");
 const passport = require("passport");
-const LocalStrategy = require("passport-local");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const fileUpload = require("express-fileupload");
 
 const dbUrl = process.env.ATLASDB_URL;
 
+//server connector
 main()
     .then( () => {
         console.log("connect to db");
@@ -56,13 +55,8 @@ const sessionOptions = {
 };
 
 app.use(session(sessionOptions));
-
 app.use(passport.initialize());
 app.use(passport.session());
-// passport.use(new LocalStrategy(User.authenticate()));
-
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
 
 app.use("/login", userLogin);
 app.use("/signIn", userRegister, fileUpload({
